@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lēra</title>
-<meta name="description" content="Lēra - tumši bēra ķēve Berģos: bildes un ciltskoks.">
+<title>Lēras ciltskoks</title>
+<meta name="description" content="Lēra (2008) - ciltsraksti un ciltsmātes Fistaškas pēcnācēju koks pēc LWHORSE datiem.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -12,32 +12,64 @@
 <div class="wrap">
 <nav class="site"><a class="brand" href="index.html">Zirgi</a><a href="chloe.html">Chloé</a><a href="lera.html" aria-current="page">Lēra</a></nav>
 <header class="top">
-  <div class="eyebrow">Berģi · Ropažu novads</div>
-  <h1>Lēra</h1>
+  <div class="eyebrow">Berģi · Ropažu novads · LWHORSE</div>
+  <h1>Lēras ciltskoks</h1>
   <div class="hero" style="margin-top:22px">
-    <img src="assets/img/lera/lera-01.jpg" alt="Lēra pļavā" width="1050" height="1400">
+    <img src="assets/img/lera/lera-01.jpg" alt="Lēra" width="1050" height="1400">
     <div>
-      <p class="lede" style="margin-top:0">Tumši bēra ķēve, astoņpadsmit gadu, apmēram 500 kilogramu.
-      Dzīvo mājās Berģos un no šī rudens vairs nav viena — aplokā nāk klāt kumeļš.</p>
-      <dl class="keyval">
-        <dt>Krāsa</dt><dd>Tumši bēra</dd>
-        <dt>Vecums</dt><dd>18 gadi</dd>
-        <dt>Svars</dt><dd>~500 kg</dd>
-        <dt>Turēšana</dt><dd>Rožu prospekts, Berģi</dd>
-        <dt>Ciltskoks</dt><dd><span class="pill">gaida reģistrēto vārdu</span></dd>
-      </dl>
+      <p class="lede" style="margin-top:0">Tumši bēra ķēve no Narvaišiem, dzimusi 2008. gada pavasarī.
+      Viņas mātes līnija datubāzē aiziet septiņas paaudzes atpakaļ — līdz ķēvei, kas dzimusi
+      1961. gadā.</p>
+      <div class="breadcrumb" id="crumb"></div>
     </div>
   </div>
+  <dl class="idcard">
+    <div><dt>Vārds</dt><dd>Lēra</dd></div>
+    <div><dt>ID numurs</dt><dd class="mono">LV060531950001</dd></div>
+    <div><dt>Dzimusi</dt><dd>15.03.2008., Narvaišos</dd></div>
+    <div><dt>Krāsa</dt><dd>Tumši bēra</dd></div>
+    <div><dt>Šķirne</dt><dd>Latvijas siltasinis</dd></div>
+  </dl>
 </header>
 
 <section>
-  <div class="sechead"><h2>Ciltsraksti</h2><span class="eyebrow">vēl nav</span></div>
-  <p>Datubāzē zirgu var atrast tikai pēc reģistrētā vārda vai identifikācijas numura — staļļa vārds
-  tur neparādās. Pasē pirmajā lapā ir abi: reģistrētais vārds un numurs, kas Latvijā sākas ar
-  <span class="mono">LV</span>. Ar jebkuru no tiem pietiek, lai uzbūvētu tieši tādu pašu koku kā
-  Chloé: ciltsrakstus četrās paaudzēs un visu ciltsmātes pēcnācēju koku.</p>
-  <div class="note"><p>Kad numurs ir zināms, šī lapa atjaunojas pati — koks tiek izvilkts no
-  LWHORSE ar to pašu skriptu, ar kuru būvēts Chloé koks.</p></div>
+  <div class="sechead"><h2>Ciltsraksti</h2><span class="eyebrow">četras paaudzes</span></div>
+  <div class="pedscroll">
+    <div class="gens eyebrow"><span>Lēra</span><span>vecāki</span><span>vecvecāki</span><span>vecvecvecāki</span></div>
+    <div class="ped" id="ped"></div>
+  </div>
+  <div class="legend">
+    <span><span class="dot sq" style="background:var(--stallion)"></span> tēva puse</span>
+    <span><span class="dot" style="background:var(--mare)"></span> mātes puse</span>
+    <span style="opacity:.75">punktētā apmale = ciltsmāte</span>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Ciltsmāšu koki</h2><span class="eyebrow" id="count"></span></div>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Meklē vārdu, gadu, krāsu vai tēvu…" aria-label="Meklēt zirgu">
+    <button id="mares" aria-pressed="false">Tikai ķēves</button>
+    <button id="linebtn" aria-pressed="false">Lēra līnija</button>
+    <button id="expand">Izvērst</button>
+    <button id="collapse">Sakļaut</button>
+  </div>
+  <div class="treebox"><ul class="tree" id="tree"><li>Ielādē…</li></ul></div>
+  <div class="legend" id="colorlegend"></div>
+  <div class="legend" style="margin-top:6px">
+    <span><span class="dot" style="background:var(--c-unknown)"></span> aplis = ķēve</span>
+    <span><span class="dot sq" style="background:var(--c-unknown)"></span> kvadrāts = ērzelis</span>
+    <span>skaitlis labajā malā = kumeļu skaits</span>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Dziļā līnija</h2><span class="eyebrow">septiņas paaudzes</span></div>
+  <p>Ciltsrakstu tabula rāda četras paaudzes, bet mātes līnija iet tālāk. Aiz Avenes (1988) seko
+  Mode, tad Dina jeb Defina (1970) un beigās <b>Fistaška, dzimusi 1961. gadā</b> — no viņas sākas
+  viss koks zemāk.</p>
+  <div class="note"><p><b>Lērai ir kumeļš.</b> Datubāzē reģistrēts <b>Claudio (2011)</b>, tēvs
+  Calliano — tas pats ērzelis, kas Chloé kokā ir Winderlines tēvs. Abas līnijas kaut kur sadodas rokās.</p></div>
 </section>
 
 <section>
@@ -54,7 +86,12 @@
   </div>
 </section>
 
-<footer><p>Ciltsraksti tiks pievienoti, tiklīdz būs zināms reģistrētais vārds vai pases numurs.</p></footer>
+<footer id="app">
+  <p>Dati izgūti no <a href="https://lwhorse.lv">lwhorse.lv</a> 21.09.2026. Koks būvēts, ejot pa mātes līniju
+  no ciltsmātēm, tāpēc ērzeļu pēcnācēji, kas dzimuši citās saimniecībās, tajā neparādās.</p>
+</footer>
+<script id="cfg" type="application/json">{"data": "data/lera.json", "subject": "36530"}</script>
+<script src="assets/tree.js"></script>
 
 </div>
 </body>
