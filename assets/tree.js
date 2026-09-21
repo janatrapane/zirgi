@@ -31,7 +31,11 @@ function build(D,cfg){
   var cl=document.getElementById('colorlegend');
   if(cl) cl.innerHTML=[['Bēra','--c-bay'],['Tumši bēra','--c-darkbay'],['Ruda','--c-chestnut'],
     ['Sirma','--c-grey'],['Dūkana','--c-dun']].map(function(c){
-      return '<span><span class="dot" style="background:var('+c[1]+')"></span> '+c[0]+'</span>';}).join('');
+      return '<span><span class="dot" style="background:var('+c[1]+')"></span> '+c[0]+'</span>';}).join('')+
+    '<span class="sep-v"></span>'+
+    '<span><span class="dot" style="background:var(--c-unknown)"></span> aplis = ķēve</span>'+
+    '<span><span class="dot sq" style="background:var(--c-unknown)"></span> kvadrāts = ērzelis</span>'+
+    '<span>skaitlis labajā malā = kumeļu skaits</span>';
 
   var cr=document.getElementById('crumb');
   if(cr&&self){var line=[],p=self; while(p){line.unshift(p);p=p.dam_id?byId[p.dam_id]:null;}
