@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chloé ciltskoks</title>
+<meta name="description" content="Chloé Classic Spin ZBZ ciltsraksti un ciltsmāšu pēcnācēju koks pēc LWHORSE datiem.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="wrap">
+<nav class="site"><a class="brand" href="index.html">Zirgi</a><a href="chloe.html" aria-current="page">Chloé</a><a href="lera.html">Lēra</a></nav>
+<header class="top">
+  <div class="eyebrow">Zviedru Birzes Zirgi · Kurmene · LWHORSE</div>
+  <h1>Chloé ciltskoks</h1>
+  <p class="lede">Divas ciltsmātes, abas ievestas no Zviedrijas, un 176 pēcnācēji, kas no tām
+  izauguši četrdesmit gados. Chloé stāv abu līniju krustpunktā.</p>
+  <div class="breadcrumb" id="crumb"></div>
+  <dl class="idcard">
+    <div><dt>Vārds</dt><dd>Chloé Classic Spin ZBZ</dd></div>
+    <div><dt>Reģ. nr.</dt><dd class="mono">LV001900006225</dd></div>
+    <div><dt>Dzimusi</dt><dd>17.03.2026., Birzēs</dd></div>
+    <div><dt>Krāsa</dt><dd>Tumši bēra</dd></div>
+    <div><dt>Šķirne</dt><dd>Latvijas siltasinis</dd></div>
+  </dl>
+</header>
+
+<section>
+  <div class="sechead"><h2>Ciltsraksti</h2><span class="eyebrow">četras paaudzes</span></div>
+  <div class="pedscroll">
+    <div class="gens eyebrow"><span>Chloé</span><span>vecāki</span><span>vecvecāki</span><span>vecvecvecāki</span></div>
+    <div class="ped" id="ped"></div>
+  </div>
+  <div class="legend">
+    <span><span class="dot sq" style="background:var(--stallion)"></span> tēva puse</span>
+    <span><span class="dot" style="background:var(--mare)"></span> mātes puse</span>
+    <span style="opacity:.75">punktētā apmale = ciltsmāte</span>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Ciltsmāšu koki</h2><span class="eyebrow" id="count"></span></div>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Meklē vārdu, gadu, krāsu vai tēvu…" aria-label="Meklēt zirgu">
+    <button id="mares" aria-pressed="false">Tikai ķēves</button>
+    <button id="linebtn" aria-pressed="false">Chloé līnija</button>
+    <button id="expand">Izvērst</button>
+    <button id="collapse">Sakļaut</button>
+  </div>
+  <div class="treebox"><ul class="tree" id="tree"><li>Ielādē…</li></ul></div>
+  <div class="legend" id="colorlegend"></div>
+  <div class="legend" style="margin-top:6px">
+    <span><span class="dot" style="background:var(--c-unknown)"></span> aplis = ķēve</span>
+    <span><span class="dot sq" style="background:var(--c-unknown)"></span> kvadrāts = ērzelis</span>
+    <span>skaitlis labajā malā = kumeļu skaits</span>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Plakāts pret datubāzi</h2></div>
+  <p>Staļļa sienā karājas divi ar roku zīmēti koki. Tie rāda to, kā reģistrā nav — kurš zirgs pārdots
+  un kurš palicis saimniecībā — bet vairākās vietās atšķiras no LWHORSE. Kur ir pretruna, pareizs ir reģistrs.</p>
+  <div class="scrollx"><table class="diff">
+    <tr><th>Zirgs</th><th>Plakātā</th><th>Datubāzē</th></tr>
+    <tr><td>Winderoza</td><td>Windermare meita</td><td><b>Windstream meita</b> — Windermare mazmeita</td></tr>
+    <tr><td>Winderona</td><td>L 4850</td><td>VCG <span class="mono">L4830</span></td></tr>
+    <tr><td>Charlie Spin ZBZ</td><td>gads nesalasāms, divi ieraksti</td><td>dzimis <span class="mono">16.03.2025</span></td></tr>
+    <tr><td>Wind`s Lobelia Spin</td><td>Wind Dale's grupā</td><td><b>Camelia meita</b>, dz. 2017</td></tr>
+    <tr><td>Qwizz / Querides</td><td>Qwizz, tēvs Querides</td><td>Qvizz, tēvs Kuerids</td></tr>
+  </table></div>
+  <div class="note"><p><b>Camelia sešas kumeles.</b> Chloé ir sestā: Lobelia (2017), Lakkarakki (2019),
+  Leticia (2020), Ancelota (2023), Charlie (2025), Chloé (2026).</p></div>
+</section>
+
+<footer id="app">
+  <p>Dati izgūti no <a href="https://lwhorse.lv">lwhorse.lv</a> 21.09.2026. Koks būvēts, ejot pa mātes līniju
+  no ciltsmātēm, tāpēc ērzeļu pēcnācēji, kas dzimuši citās saimniecībās, tajā neparādās.</p>
+</footer>
+<script id="cfg" type="application/json">{"data": "data/chloe.json", "subject": "79699"}</script>
+<script src="assets/tree.js"></script>
+
+</div>
+</body>
+</html>
