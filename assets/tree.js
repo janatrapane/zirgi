@@ -15,6 +15,10 @@ var COLORS=[['Tumši bēra','--c-darkbay'],['Dūkanbēra','--c-dun'],['Bēra','-
   ['Dūkana','--c-dun'],['Dūkans','--c-dun'],['Melna','--c-black']];
 function colorVar(c){for(var i=0;i<COLORS.length;i++){if(c&&c.indexOf(COLORS[i][0])===0)return COLORS[i][1];}
   return '--c-unknown';}
+function fold(s){return String(s||'').toLowerCase()
+  .replace(/[āàá]/g,'a').replace(/[ēèé]/g,'e').replace(/[īìí]/g,'i').replace(/[ūùú]/g,'u')
+  .replace(/[čć]/g,'c').replace(/[ģ]/g,'g').replace(/[ķ]/g,'k').replace(/[ļ]/g,'l')
+  .replace(/[ņñ]/g,'n').replace(/[šś]/g,'s').replace(/[žź]/g,'z').replace(/[`'’]/g,'');}
 function shortName(n){return n.replace(/\s+(AA|\d{2}-)[\w\-]*$/,'').trim();}
 
 function build(D,cfg){
@@ -90,11 +94,11 @@ function build(D,cfg){
       '<span>'+(flat?'Mātes līnija':'Tēvs')+'</span><span>Kumeļi</span></div>';}
 
   function render(){
-    var q=(qEl?qEl.value:'').trim().toLowerCase(), out=[], shown=0;
+    var q=fold((qEl?qEl.value:'').trim()), out=[], shown=0;
     var flat=!!(q||maresOnly||lineOnly);
     if(flat){
       rows.forEach(function(r){
-        var hay=(r.name+' '+r.year+' '+r.sire+' '+r.color).toLowerCase();
+        var hay=fold(r.name+' '+r.year+' '+r.sire+' '+r.color);
         if(q&&hay.indexOf(q)===-1)return;
         if(maresOnly&&r.sex!=='S')return;
         if(lineOnly&&!lineIds[r.id])return;

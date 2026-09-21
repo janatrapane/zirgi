@@ -53,6 +53,7 @@ header.top{padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom
 .idcard dt{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--muted);margin:0 0 4px}
 .idcard dd{margin:0;font-size:15px;font-weight:500}
+@media (max-width:560px){.idcard div:last-child:nth-child(odd){grid-column:1/-1}}
 section{margin-top:52px}
 .sechead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
   border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:20px}
@@ -79,7 +80,17 @@ section{margin-top:52px}
 .gens{display:flex;margin:0 0 10px}
 .gens span{width:178px;flex:none}
 .gens span+span{margin-left:39px}
-@media (max-width:700px){.pbox{width:150px}.gens span{width:150px}}
+@media (max-width:760px){
+  .pedscroll{overflow-x:visible}
+  .gens{display:none}
+  .ped{display:block;min-width:0}
+  .pnode{display:block}
+  .pbox{width:auto}
+  .pkids{margin-left:10px;padding-left:16px;gap:8px;border-left:1px solid var(--line-2)}
+  .pkids::before{display:none}
+  .pnode>.pbox::after,.pkids>.pnode>.pbox::before{display:none}
+  .pbox+.pkids{margin-top:8px}
+}
 .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
 input[type=search]{font:inherit;font-size:14.5px;padding:8px 12px;border:1px solid var(--line);
   border-radius:4px;background:var(--surface);color:var(--ink);min-width:200px;flex:1 1 200px}
@@ -93,6 +104,11 @@ button[aria-pressed=true]{background:var(--ink);color:var(--ground);border-color
 .tgrid{min-width:660px}
 .thead,.row{display:grid;grid-template-columns:minmax(0,1.7fr) 58px 118px minmax(0,1.25fr) 62px;
   gap:14px;align-items:center}
+@media (max-width:620px){
+  .tgrid{min-width:520px}
+  .thead,.row{grid-template-columns:minmax(0,1.6fr) 52px minmax(0,1.1fr) 56px;gap:10px}
+  .thead span:nth-child(3),.row .col.cl{display:none}
+}
 .thead{position:sticky;top:0;z-index:2;background:var(--surface-2);
   border-bottom:1px solid var(--line);padding:9px 16px;
   font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;
@@ -147,10 +163,11 @@ table.diff th{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spaci
 .card .arrow{margin-top:14px;font-size:13px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
 .card.pending{opacity:.72}
 .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:26px;align-items:center}
-@media (max-width:720px){.hero{grid-template-columns:1fr}}
+@media (max-width:720px){.hero{grid-template-columns:1fr;gap:18px}.hero img{max-height:340px}}
 .hero img{width:100%;height:auto;max-height:440px;object-fit:cover;object-position:center 30%;
   border-radius:6px;box-shadow:var(--shadow);display:block}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:20px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:20px}
+@media (min-width:640px){.gallery{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}}
 .gallery a{display:block;border-radius:5px;overflow:hidden;background:var(--sunken);
   box-shadow:var(--shadow);line-height:0}
 .gallery img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;display:block;
@@ -175,3 +192,17 @@ figcaption{font-size:13px;color:var(--muted);margin-top:9px;max-width:64ch}
 footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer p{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  :root{--ground:#fff;--surface:#fff;--surface-2:#fff;--sunken:#fff;--ink:#000;--ink-2:#222;
+    --muted:#555;--line:#bbb;--line-2:#999;--line-soft:#ddd;--shadow:none;--focus-soft:#f2f2f2}
+  nav.site,.controls,.gallery,figure.portrait,.legend{display:none}
+  .treebox{overflow:visible;border:0;box-shadow:none}
+  .tgrid{min-width:0}
+  .thead{position:static}
+  .row{break-inside:avoid;padding:2px 0}
+  .hero{grid-template-columns:1fr}
+  .hero img{max-height:180px}
+  a{text-decoration:none;color:#000}
+  section{margin-top:26px;break-inside:avoid}
+  footer{margin-top:24px}
+}
