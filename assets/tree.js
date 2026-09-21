@@ -22,7 +22,7 @@ function fold(s){return String(s||'').toLowerCase()
 function shortName(n){return n.replace(/\s+(AA|\d{2}-)[\w\-]*$/,'').trim();}
 
 function build(D,cfg){
-  var rows=D.horses, ped=D.pedigree, subject=cfg.subject;
+  var rows=D.horses, ped=D.pedigree, subject=cfg.subject, THUMBS=cfg.thumbs||{};
   var byId={}; rows.forEach(function(r){byId[r.id]=r;});
   var self=byId[subject];
   var lineIds={};
@@ -44,7 +44,10 @@ function build(D,cfg){
       var cls=depth===0?'self':(h.s==='T'?'t':'m');
       var l1=[h.y,h.c].filter(Boolean).join(' · ');
       var meta=l1+(h.b?(l1?'<br>':'')+h.b:'');
-      var dot='<span class="dot'+(h.s==='T'?' sq':'')+'" style="background:var('+colorVar(h.c)+')"></span>';
+      var dot=(h.id&&THUMBS[h.id])
+        ? '<img class="av" src="'+THUMBS[h.id]+'" alt="'+esc(h.n)+'" loading="lazy" '+
+          'style="--ring:var('+colorVar(h.c)+')">'
+        : '<span class="dot'+(h.s==='T'?' sq':'')+'" style="background:var('+colorVar(h.c)+')"></span>';
       var nm=h.id?'<a href="'+LW+h.id+'" target="_blank" rel="noopener">'+esc(h.n)+'</a>':esc(h.n);
       var box='<div class="pbox '+cls+(h.root?' root':'')+'"><span class="nm">'+dot+
         '<span>'+nm+'</span></span>'+(meta?'<span class="meta">'+meta+'</span>':'')+'</div>';
@@ -82,12 +85,16 @@ function build(D,cfg){
     return '<div class="'+cls+'">'+
       '<span class="nmcell" style="padding-left:'+(d*16)+'px;background-size:'+
         Math.max(0,d*16-6)+'px 100%">'+tg+
-        '<span class="dot'+(r.sex==='V'?' sq':'')+'" style="background:var('+colorVar(r.color)+')"></span>'+
+        (THUMBS[r.id]
+          ? '<img class="av" src="'+THUMBS[r.id]+'" alt="'+esc(r.name)+'" loading="lazy" '+
+            'style="--ring:var('+colorVar(r.color)+')">'
+          : '<span class="dot'+(r.sex==='V'?' sq':'')+'" style="background:var('+colorVar(r.color)+')"></span>')+
         '<a class="nm2" href="'+LW+r.id+'" target="_blank" rel="noopener" title="'+esc(r.name)+'">'+
         esc(r.name)+'</a></span>'+
       '<span class="col yr">'+esc(r.year)+'</span>'+
       '<span class="col cl">'+esc(r.color)+'</span>'+ last +
-      '<span class="cnt">'+(kidn?'<b>'+kidn+'</b> kum.':'')+'</span></div>';}
+      '<span class="cnt"><button class="pl" data-pl="'+r.id+'" title="Kopēt saiti uz šo zirgu" '+
+      'aria-label="Kopēt saiti">#</button>'+(kidn?'<b>'+kidn+'</b> kum.':'')+'</span></div>';}
 
   function head(flat){
     return '<div class="thead"><span>Vārds</span><span>Dzimis</span><span>Krāsa</span>'+
@@ -136,6 +143,40 @@ function build(D,cfg){
   if(ex) ex.addEventListener('click',function(){collapsed={};reset();render();});
   if(co) co.addEventListener('click',function(){collapsed={};
     rows.forEach(function(r){if(r.depth>=1)collapsed[r.id]=true;});reset();render();});
-  render();
+  function toast(msg){
+    var el=document.createElement('div'); el.className='toast'; el.textContent=msg;
+    document.body.appendChild(el); setTimeout(function(){el.remove();},1800);
+  }
+  treeEl.addEventListener('click',function(e){
+    var b=e.target.closest('.pl'); if(!b) return;
+    var url=location.origin+location.pathname+'?h='+b.dataset.pl;
+    history.replaceState(null,'','?h='+b.dataset.pl);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){toast('Saite nokopēta');},
+                                             function(){toast('Saite adreses joslā');});
+    } else { toast('Saite adreses joslā'); }
+  });
+
+  function openTo(id){
+    if(!byId[id]) return false;
+    var p=byId[id].dam_id;
+    while(p&&byId[p]){ collapsed[p]=false; p=byId[p].dam_id; }
+    return true;
+  }
+  var want=new URLSearchParams(location.search).get('h');
+  if(want&&openTo(want)){
+    render();
+    setTimeout(function(){
+      var rowsEls=treeEl.querySelectorAll('.row');
+      for(var i=0;i<rowsEls.length;i++){
+        var a=rowsEls[i].querySelector('.pl');
+        if(a&&a.dataset.pl===want){
+          rowsEls[i].classList.add('target');
+          rowsEls[i].scrollIntoView({block:'center',behavior:'smooth'});
+          break;
+        }
+      }
+    },60);
+  } else { render(); }
 }
 })();
