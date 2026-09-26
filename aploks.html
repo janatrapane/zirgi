@@ -217,7 +217,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
           <div class="cam"><span class="dot d1">1</span><div><b>TrackMix WiFi</b> uz staļļa stūra pret aploka vidu, 3–3,5 m augstumā
             <p>Stallis ir koka būdiņa ar jumta pārkari un rozeti priekšpusē: kameru stiprina zem pārkares priekšējā stūrī, vadu līdz rozetei ieliek aizsargcaurulē (zirgi to aizsniedz). IR prožektoru var pieslēgt pie tās pašas rozetes.</p><p>Redz visu aploku dienā. Naktī pašas IR pietiek ~30 m (iekrāsotā zona), tālākajai daļai vajag IR prožektoru blakus kamerai.</p></div></div>
           <div class="cam"><span class="dot d2">2</span><div><b>Elite WiFi 180°</b> uz tack room stūra pie aploka, skatās uz augšu
-            <p><b>Galvenā kamera:</b> vienā kadrā redz barošanas vietu un dzirdni (dažu metru attālumā) un lielos vārtus (~25 m). Stiprina uz mastiņa vai kronšteina vismaz 2,8–3 m augstumā un pagriež uz vārtu pusi, lai kadrā ir visas trīs vietas. Redz arī joslu aiz staļļa un lielo ceļu.</p><p>Stūrī kontakta nav: barošanas bloku liek iekšā rozetē (stallī vai tack room), līdz kamerai velk 12 V pagarinātāju (4,5 m komplektā, vajadzības gadījumā vēl 5 m) augstu gar sienu aizsargcaurulē. WiFi turpat blakus.</p></div></div>
+            <p><b>Galvenā kamera:</b> vienā kadrā redz barošanas vietu un dzirdni (dažu metru attālumā) un lielos vārtus (~25 m, naktī ar pašas IR līdz 30 m). Stiprina uz mastiņa vai kronšteina vismaz 2,8–3 m augstumā un pagriež uz vārtu pusi, lai kadrā ir visas trīs vietas. Redz arī joslu aiz staļļa un lielo ceļu.</p><p>Stūrī kontakta nav: barošanas bloku liek iekšā rozetē (stallī vai tack room), līdz kamerai velk 12 V pagarinātāju (4,5 m komplektā, vajadzības gadījumā vēl 5 m) augstu gar sienu aizsargcaurulē. WiFi turpat blakus.</p></div></div>
         </div>
       </section>
       <section>
@@ -230,6 +230,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
         <ul style="margin-top:10px">
           <li><b>Pastāvīgi neredzams ar abām kamerām:</b> tikai staļļa iekšpuse un tas, kas ir aiz tack room (dienvidos no tās).</li>
           <li>Aploka laukumā dienā neredzamu vietu nepaliek.</li>
+          <li>Abām kamerām ir RTSP/RTMP/ONVIF: video vēlāk var rādīt arī tīmeklī.</li>
           <li><b>Barošana un dzirdne:</b> redz abas kameras. <b>Vārti:</b> redz kamera 2. Kamera 1 vārtus redz tikai tad, ja to stiprina uz priekšējā stūra vārtu pusē, nevis pie lampas.</li>
           <li>Punktētā līnija ap stalli = zirgu taka apkārt.</li>
         </ul>
@@ -250,7 +251,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
     <h2>Gaismas</h2>
     <ul>
       <li><b>IR prožektors pie kameras 1</b> (staļļa zelminī, 0,5–1 m sānis), vērsts uz aploka tālo stūri. Ieslēdzas pats krēslā. Zirgi IR gaismu neredz.</li>
-      <li><b>IR prožektors pie kameras 2</b> tikai tad, ja vārtu nakts attēls ir par tumšu (Univivi 12 LED, 30 m).</li>
+      <li><b>IR prožektors pie kameras 2</b> visticamāk nav vajadzīgs: Elite WiFi pašas IR aizsniedz 30 m, vārti ir ~25 m. Pērc tikai, ja nakts attēls tomēr par tumšu.</li>
       <li><b>Redzamā gaisma</b> barošanai, dzirdnei un vārtu ceļam: 30 W siltā LED ar kustības sensoru uz tack room stūra ≥3 m, vērsta lejup uz smiltīm, ne uz mājas logiem un ielu.</li>
       <li><b>Shelly relejs</b> aiz katras redzamās lampas: ieslēdz no telefona un pēc grafika. Kustības sensors darbojas tikai barošanas laikos, lai zirgi lampu nedarbina visu nakti.</li>
       <li>Kameru baltos prožektorus ieslēdz manuāli no Reolink lietotnes, kad gribi krāsu attēlu. Automātisko ieslēgšanos pēc kustības izslēdz.</li>
