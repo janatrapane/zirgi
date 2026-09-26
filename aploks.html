@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Zirgu aploka videonovērošanas plāns: kameru un gaismu vietas, redzamības zonas un iepirkumu saraksts.">
+<title>Aploka kameru plāns</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<style>
+:root{
+  --bg:#f5f6f1; --ink:#1f2a22; --muted:#5d6a60; --line:#c9d0c4;
+  --grass:#cfe3bf; --grass-edge:#6f8f5c; --road:#e4dccb; --road-ink:#8a7d63;
+  --stable:#8b5e3c; --tack:#a07a58; --water:#3d82b8;
+  --cam1:#c2410c; --cam2:#6d28d9; --ir:rgba(194,65,12,.13); --cov2:rgba(109,40,217,.13);
+  --panel:#ffffff; --warm:#f5b83d; --sand:#ecd3a0; --night:rgba(31,42,34,.22);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#141a16; --ink:#e6ece4; --muted:#9aa89d; --line:#34403a;
+  --grass:#2a3d27; --grass-edge:#7fa36a; --road:#3a352b; --road-ink:#bfae8a;
+  --stable:#c48a5c; --tack:#b8916c; --water:#6aaee0;
+  --cam1:#fb8a4c; --cam2:#b794f6; --ir:rgba(251,138,76,.16); --cov2:rgba(183,148,246,.16); --panel:#1b221d; --warm:#f5c150; --sand:#6e5a36; --night:rgba(0,0,0,.45);}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#141a16; --ink:#e6ece4; --muted:#9aa89d; --line:#34403a;
+  --grass:#2a3d27; --grass-edge:#7fa36a; --road:#3a352b; --road-ink:#bfae8a;
+  --stable:#c48a5c; --tack:#b8916c; --water:#6aaee0;
+  --cam1:#fb8a4c; --cam2:#b794f6; --ir:rgba(251,138,76,.16); --cov2:rgba(183,148,246,.16); --panel:#1b221d; --warm:#f5c150; --sand:#6e5a36; --night:rgba(0,0,0,.45);}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:grid;gap:22px}
+h1{font:600 1.7rem/1.2 "Source Serif 4",Georgia,serif;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+svg{display:block;width:100%;height:auto;min-width:320px}
+svg text{font-family:"Source Sans 3",system-ui,sans-serif;fill:var(--ink)}
+.side{display:grid;gap:16px}
+h2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.cam{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.dot{width:26px;height:26px;border-radius:50%;color:#fff;font-weight:700;display:grid;place-items:center;font-size:.85rem}
+.d1{background:var(--cam1)}.d2{background:var(--cam2)}
+.cam p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.cam b{color:var(--ink)}
+ul{margin:0;padding-left:18px}
+li{margin:3px 0}
+.q{border-top:1px solid var(--line);padding-top:14px}
+.legend{display:grid;gap:10px}.legend>div{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:.95rem}
+.sw{width:20px;height:20px;border-radius:4px;border:1px solid var(--line);margin-top:2px}
+.sw-b1{background:repeating-linear-gradient(-45deg,var(--cam1) 0 2px,transparent 2px 6px)}
+.sw-s{background:var(--sand)}
+.sw-n{background:repeating-linear-gradient(45deg,var(--night) 0 3px,var(--ink) 3px 4px,var(--night) 4px 7px);opacity:.8}
+.grid2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.front{display:grid;gap:10px}
+.note{color:var(--muted);font-size:.9rem;margin:8px 0 0}
+.shop{display:grid;gap:10px}
+.h2big{font:600 1.25rem/1.2 "Source Serif 4",Georgia,serif;letter-spacing:0;text-transform:none;color:var(--ink);margin:0}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.75rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.r,th.r{text-align:right;white-space:nowrap}
+tr.grp td{background:var(--bg);font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+tr.done td:not(:first-child){color:var(--muted);text-decoration:line-through}
+tfoot td{font-weight:700;border-bottom:0}
+td a{color:var(--cam2)}
+td small{color:var(--muted);display:block}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
+.num{font-variant-numeric:tabular-nums}
+</style>
+
+<style>
+.zsite{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding-block:4px 10px;border-bottom:1px solid var(--line)}
+.zsite a{color:var(--muted);text-decoration:none;font-weight:600}
+.zsite a:hover,.zsite a:focus-visible{color:var(--ink);text-decoration:underline}
+.zsite a[aria-current]{color:var(--ink)}
+.zsite .brand{font:600 1.1rem/1 "Source Serif 4",Georgia,serif;color:var(--ink);margin-right:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="zsite"><a class="brand" href="index.html">Zirgi</a><a href="chloe.html">Chloé</a><a href="lera.html">Lēra</a><a href="aploks.html" aria-current="page">Aploks</a></nav>
+  <header>
+    <h1>Aploka kameru plāns</h1>
+    <p class="sub">Skats no augšas, mērogā: 1 rūtiņa = 5 m.</p>
+  </header>
+
+  <section class="shop" id="saraksts">
+    <div class="shop-head">
+      <h2 class="h2big">Iepirkumu saraksts</h2>
+      <p class="sub">Amazon.de cenas 26.09.2026, piegāde uz Latviju bez maksas. Atzīmē, kas nopirkts.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th></th><th>Kas</th><th>Kur liek</th><th class="r">Gab.</th><th class="r">Cena</th></tr></thead>
+        <tbody id="rows"></tbody>
+        <tfoot>
+          <tr><td></td><td colspan="3">Obligātais Amazon.de pasūtījums</td><td class="r num" id="tMust"></td></tr>
+          <tr><td></td><td colspan="3">Būvveikalā (aptuveni)</td><td class="r num">~30–50 €</td></tr>
+          <tr><td></td><td colspan="3">Vēl jānopērk (neatzīmētie obligātie)</td><td class="r num" id="tLeft"></td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="note">Plus elektriķis: kamera 1, IR 1 un kamera 2 pie lampu vadiem, 2 Shelly releji, gaisma tack room stūrī.</p>
+  </section>
+
+  <div class="grid">
+    <div class="map">
+      <svg viewBox="0 0 580 560" role="img" aria-label="Aploka plāns ar staļļa, tack room, dzirdnes, vārtu un divu kameru atrašanās vietām">
+        <defs>
+          <clipPath id="pad"><rect x="60" y="70" width="390" height="390"/></clipPath>
+          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M50 0H0V50" fill="none" stroke="var(--grass-edge)" stroke-opacity=".18" stroke-width="1"/>
+          </pattern>
+          <pattern id="sandPad" width="6" height="6" patternUnits="userSpaceOnUse">
+            <rect width="6" height="6" fill="var(--sand)"/>
+            <circle cx="3" cy="3" r="1.1" fill="var(--road-ink)" fill-opacity=".45"/>
+          </pattern>
+          <pattern id="hatchNight" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="var(--night)"/>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="var(--ink)" stroke-opacity=".35" stroke-width="2"/>
+          </pattern>
+          <pattern id="hatchBlind1" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="var(--cam1)" stroke-opacity=".7" stroke-width="2"/>
+          </pattern>
+        </defs>
+
+        <!-- small dirt road (top) -->
+        <rect x="20" y="22" width="450" height="30" fill="var(--road)"/>
+        <text x="245" y="42" text-anchor="middle" font-size="13" style="fill:var(--road-ink)">mazs zemes ceļš</text>
+
+        <!-- big road (right) -->
+        <rect x="490" y="22" width="44" height="520" fill="var(--road)"/>
+        <text x="512" y="290" text-anchor="middle" font-size="13" style="fill:var(--road-ink)" transform="rotate(90 512 290)">lielais ceļš</text>
+
+        <!-- paddock -->
+        <rect x="60" y="70" width="390" height="390" fill="var(--grass)"/>
+        <rect x="60" y="70" width="390" height="390" fill="url(#grid)"/>
+
+        <!-- coverage cam 1: IR 30 m -->
+        <g clip-path="url(#pad)">
+          <circle cx="370" cy="405" r="300" fill="var(--ir)"/>
+          <circle cx="370" cy="405" r="300" fill="none" stroke="var(--cam1)" stroke-dasharray="6 5" stroke-width="1.5"/>
+          <!-- coverage cam 2: 180° facing north, ~25 m -->
+          <path d="M450 470 L200 470 A250 250 0 0 1 700 470 Z" fill="var(--cov2)"/>
+        </g>
+        <path d="M200 470 A250 250 0 0 1 450 220" fill="none" stroke="var(--cam2)" stroke-dasharray="6 5" stroke-width="1.5" clip-path="url(#pad)"/>
+
+        <!-- sand on anti-mud grid: trough + gate -->
+        <rect x="295" y="428" width="78" height="32" fill="url(#sandPad)"/>
+        <rect x="418" y="192" width="32" height="62" fill="url(#sandPad)"/>
+        <text x="300" y="422" font-size="11" style="fill:var(--muted)">smiltis</text>
+        <text x="414" y="266" font-size="11" text-anchor="end" style="fill:var(--muted)">smiltis</text>
+
+        <!-- night-dark zone: beyond 30 m from cam 1 -->
+        <path clip-path="url(#pad)" fill-rule="evenodd" fill="url(#hatchNight)"
+          d="M60 70H450V460H60Z M70 405a300 300 0 1 0 600 0a300 300 0 1 0 -600 0Z"/>
+        <!-- cam 1 blind quadrant behind stable (covered by cam 2) -->
+        <path d="M370 430V460H450V405H395V430Z" fill="url(#hatchBlind1)"/>
+
+        <!-- fence -->
+        <rect x="60" y="70" width="390" height="390" fill="none" stroke="var(--grass-edge)" stroke-width="3"/>
+        <!-- gate on right fence -->
+        <line x1="450" y1="200" x2="450" y2="245" stroke="var(--grass)" stroke-width="5"/>
+        <line x1="450" y1="200" x2="486" y2="218" stroke="var(--grass-edge)" stroke-width="3"/>
+        <line x1="450" y1="245" x2="486" y2="227" stroke="var(--grass-edge)" stroke-width="3"/>
+        <text x="444" y="192" text-anchor="end" font-size="12" font-weight="600">lielie vārti uz ielu</text>
+
+        <!-- stable ~2.5x2.5 m -->
+        <rect x="370" y="405" width="25" height="25" fill="var(--stable)"/>
+        <text x="382" y="398" text-anchor="middle" font-size="12" font-weight="600">stallis</text>
+
+        <text x="130" y="100" font-size="12" font-weight="600">naktī tumšs bez IR prožektora</text>
+        <text x="400" y="100" font-size="12" font-weight="600" text-anchor="middle">tumšs</text>
+        <!-- horse path around stable -->
+        <path d="M362 397 H403 V438 H362 Z" fill="none" stroke="var(--muted)" stroke-dasharray="2 4" stroke-width="1.2"/>
+
+        <!-- trough -->
+        <rect x="358" y="449" width="16" height="9" rx="2" fill="var(--water)"/>
+        <text x="352" y="446" text-anchor="end" font-size="12" font-weight="600">barošana + apsild. dzirdne</text>
+
+        <!-- tack room 9 x 3.3 m = ~30 m2 -->
+        <rect x="360" y="466" width="90" height="33" fill="var(--tack)"/>
+        <text x="405" y="487" text-anchor="middle" font-size="12" font-weight="600" style="fill:#fff">tack room</text>
+
+        <!-- wifi -->
+        <g transform="translate(470 510)">
+          <path d="M-10 0 A14 14 0 0 1 10 0" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M-5 5 A7 7 0 0 1 5 5" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="0" cy="9" r="2" fill="var(--ink)"/>
+        </g>
+        <text x="470" y="535" text-anchor="middle" font-size="12">WiFi</text>
+
+        <!-- LIGHTS -->
+        <!-- IR 1 beam toward far corner -->
+        <path d="M358 412 L150 120 L100 200 Z" fill="var(--cam1)" fill-opacity=".07" clip-path="url(#pad)"/>
+        <rect x="352" y="408" width="12" height="9" rx="2" fill="var(--ink)"/>
+        <text x="346" y="421" text-anchor="end" font-size="11" font-weight="600">IR 1</text>
+        <!-- warm floodlight at tack room trough end -->
+        <path d="M382 466 L292 424 L378 424 Z" fill="var(--warm)" fill-opacity=".35"/>
+        <circle cx="382" cy="466" r="6" fill="var(--warm)" stroke="var(--ink)" stroke-width="1.2"/>
+        <text x="300" y="515" font-size="11" font-weight="600">☀ gaisma ar kustības sensoru</text>
+        <line x1="340" y1="506" x2="380" y2="472" stroke="var(--muted)"/>
+        <!-- existing lamp on stable front -->
+        <circle cx="370" cy="424" r="4" fill="#f3e6b3" stroke="var(--ink)" stroke-width="1"/>
+        <!-- optional IR 2 toward gate -->
+        <rect x="436" y="454" width="10" height="8" rx="2" fill="none" stroke="var(--ink)" stroke-dasharray="2 2"/>
+        <text x="432" y="450" text-anchor="end" font-size="10" style="fill:var(--muted)">IR 2 (ja vajag)</text>
+
+        <!-- camera 1 -->
+        <circle cx="370" cy="405" r="11" fill="var(--cam1)"/>
+        <text x="370" y="409.5" text-anchor="middle" font-size="12" font-weight="700" style="fill:#fff">1</text>
+        <!-- camera 2 -->
+        <circle cx="450" cy="466" r="11" fill="var(--cam2)"/>
+        <text x="450" y="470.5" text-anchor="middle" font-size="12" font-weight="700" style="fill:#fff">2</text>
+
+        <!-- distances -->
+        <line x1="370" y1="405" x2="64" y2="74" stroke="var(--cam1)" stroke-width="1" stroke-opacity=".6"/>
+        <text x="175" y="175" font-size="12" class="num" transform="rotate(47 175 175)" style="fill:var(--cam1)">~46 m līdz tālākajam stūrim</text>
+        <text x="120" y="150" font-size="12" style="fill:var(--cam1)">↑ te vajag IR prožektoru</text>
+        <text x="95" y="395" font-size="12" style="fill:var(--cam1)">IR 30 m robeža</text>
+
+        <!-- scale -->
+        <line x1="60" y1="490" x2="160" y2="490" stroke="var(--ink)" stroke-width="2"/>
+        <line x1="60" y1="485" x2="60" y2="495" stroke="var(--ink)" stroke-width="2"/>
+        <line x1="160" y1="485" x2="160" y2="495" stroke="var(--ink)" stroke-width="2"/>
+        <text x="110" y="510" text-anchor="middle" font-size="12" class="num">10 m</text>
+        <text x="255" y="486" text-anchor="middle" font-size="12" class="num" style="fill:var(--muted)">aploks ~39 × 39 m (1500 m²)</text>
+      </svg>
+    </div>
+
+    <div class="side">
+      <section>
+        <h2>Kameras</h2>
+        <div style="display:grid;gap:12px">
+          <div class="cam"><span class="dot d1">1</span><div><b>TrackMix WiFi</b> uz staļļa stūra pret aploka vidu, 3–3,5 m augstumā
+            <p>Stallis ir koka būdiņa ar jumta pārkari un rozeti priekšpusē: kameru stiprina zem pārkares priekšējā stūrī, vadu līdz rozetei ieliek aizsargcaurulē (zirgi to aizsniedz). IR prožektoru var pieslēgt pie tās pašas rozetes.</p><p>Redz visu aploku dienā. Naktī pašas IR pietiek ~30 m (iekrāsotā zona), tālākajai daļai vajag IR prožektoru blakus kamerai.</p></div></div>
+          <div class="cam"><span class="dot d2">2</span><div><b>Elite WiFi 180°</b> uz tack room stūra pie aploka, skatās uz augšu
+            <p><b>Galvenā kamera:</b> vienā kadrā redz barošanas vietu un dzirdni (dažu metru attālumā) un lielos vārtus (~25 m). Stiprina uz mastiņa vai kronšteina vismaz 2,8–3 m augstumā un pagriež uz vārtu pusi, lai kadrā ir visas trīs vietas. Redz arī joslu aiz staļļa un lielo ceļu.</p><p>Stūrī kontakta nav: barošanas bloku liek iekšā rozetē (stallī vai tack room), līdz kamerai velk 12 V pagarinātāju (4,5 m komplektā, vajadzības gadījumā vēl 5 m) augstu gar sienu aizsargcaurulē. WiFi turpat blakus.</p></div></div>
+        </div>
+      </section>
+      <section>
+        <h2>Ko redz / neredz</h2>
+        <div class="legend">
+          <div><span class="sw sw-b1"></span><span><b>Kamera 1 neredz</b> (aizsedz stallis): stūris starp stalli, dzirdni un vārtu pusi. <b>To redz kamera 2</b> no ~5–10 m.</span></div>
+          <div><span class="sw sw-n"></span><span><b>Naktī tumšs</b>, tālāk par 30 m no kameras 1: tālie stūri augšā un niecīgs kreisais apakšējais stūrītis. Dienā redzams; naktī atrisina IR prožektors.</span></div>
+          <div><span class="sw sw-s"></span><span><b>Smiltis uz pretdubļu režģa</b> pie dzirdnes un pie vārtiem, tur zirgi stāv visbiežāk. Smiltis pie dzirdnes redz kamera 2 (un daļēji 1), smiltis pie vārtiem redz kamera 1. Uz gaišajām smiltīm tumšs zirgs arī naktī labi izceļas.</span></div>
+        </div>
+        <ul style="margin-top:10px">
+          <li><b>Pastāvīgi neredzams ar abām kamerām:</b> tikai staļļa iekšpuse un tas, kas ir aiz tack room (dienvidos no tās).</li>
+          <li>Aploka laukumā dienā neredzamu vietu nepaliek.</li>
+          <li><b>Barošana un dzirdne:</b> redz abas kameras. <b>Vārti:</b> redz kamera 2. Kamera 1 vārtus redz tikai tad, ja to stiprina uz priekšējā stūra vārtu pusē, nevis pie lampas.</li>
+          <li>Punktētā līnija ap stalli = zirgu taka apkārt.</li>
+        </ul>
+      </section>
+      <section class="q">
+        <h2>Izmēri</h2>
+        <ul>
+          <li>Aploks ~39 × 39 m (1500 m²)</li>
+          <li>Stallis ~2,5 × 2,5 m (6 m²), zirgi var iet apkārt</li>
+          <li>Tack room ~30 m², ārpus aploka no dzirdnes līdz stūrim</li>
+          <li>WiFi ~10 m no dzirdnes</li>
+          <li>Lielie vārti labajā žogā, ~20 m no kameras 1</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <section class="front">
+    <h2>Gaismas</h2>
+    <ul>
+      <li><b>IR prožektors pie kameras 1</b> (staļļa zelminī, 0,5–1 m sānis), vērsts uz aploka tālo stūri. Ieslēdzas pats krēslā. Zirgi IR gaismu neredz.</li>
+      <li><b>IR prožektors pie kameras 2</b> tikai tad, ja vārtu nakts attēls ir par tumšu (Univivi 12 LED, 30 m).</li>
+      <li><b>Redzamā gaisma</b> barošanai, dzirdnei un vārtu ceļam: 30 W siltā LED ar kustības sensoru uz tack room stūra ≥3 m, vērsta lejup uz smiltīm, ne uz mājas logiem un ielu.</li>
+      <li><b>Shelly relejs</b> aiz katras redzamās lampas: ieslēdz no telefona un pēc grafika. Kustības sensors darbojas tikai barošanas laikos, lai zirgi lampu nedarbina visu nakti.</li>
+      <li>Kameru baltos prožektorus ieslēdz manuāli no Reolink lietotnes, kad gribi krāsu attēlu. Automātisko ieslēgšanos pēc kustības izslēdz.</li>
+    </ul>
+  </section>
+
+  <section class="front">
+    <h2>Kamera 1 uz staļļa: priekšskats</h2>
+    <div class="grid2">
+      <div class="map">
+        <svg viewBox="0 0 420 330" role="img" aria-label="Staļļa priekšskats ar kameras un IR prožektora vietu zem zelmiņa pārkares un zirga aizsniedzamības augstumu">
+          <!-- ground -->
+          <line x1="20" y1="290" x2="400" y2="290" stroke="var(--grass-edge)" stroke-width="3"/>
+          <!-- horse reach line 2.7 m (scale 60 px/m, ground y=290) -->
+          <line x1="20" y1="128" x2="400" y2="128" stroke="var(--cam1)" stroke-dasharray="7 5" stroke-width="1.5"/>
+          <text x="398" y="121" text-anchor="end" font-size="12" style="fill:var(--cam1)">zirgs aizsniedz līdz ~2,7 m</text>
+          <!-- wall 2.5 m wide, eave 2.3 m -->
+          <rect x="135" y="152" width="150" height="138" fill="var(--stable)"/>
+          <!-- door opening -->
+          <rect x="150" y="185" width="60" height="105" fill="var(--ink)" fill-opacity=".55"/>
+          <rect x="222" y="185" width="50" height="105" fill="var(--tack)"/>
+          <!-- roof gable with overhang, apex 3.3 m -->
+          <path d="M110 160 L210 92 L310 160" fill="none" stroke="var(--grass-edge)" stroke-width="10" stroke-linejoin="round"/>
+          <path d="M135 152 L210 101 L285 152 Z" fill="var(--stable)"/>
+          <!-- solar -->
+          <path d="M232 106 L282 140" stroke="var(--water)" stroke-width="6"/>
+          <text x="300" y="100" font-size="11" style="fill:var(--muted)">saules paneļi</text>
+          <!-- camera near apex, offset to paddock side -->
+          <circle cx="188" cy="122" r="11" fill="var(--cam1)"/>
+          <text x="188" y="126.5" text-anchor="middle" font-size="12" font-weight="700" style="fill:#fff">1</text>
+          <!-- existing lamp -->
+          <ellipse cx="262" cy="170" rx="11" ry="6" fill="#f3e6b3" stroke="var(--ink)"/>
+          <text x="300" y="182" font-size="11" style="fill:var(--muted)">esošā lampa</text>
+          <line x1="274" y1="172" x2="298" y2="178" stroke="var(--muted)"/>
+          <!-- IR -->
+          <rect x="222" y="116" width="18" height="12" rx="2" fill="var(--ink)"/>
+          <text x="248" y="126" font-size="11">IR</text>
+          <!-- socket + conduit -->
+          <rect x="140" y="200" width="8" height="10" fill="#fff" stroke="var(--ink)"/>
+          <path d="M188 133 V142 H144 V200" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="1 0"/>
+          <text x="40" y="207" font-size="11">rozete</text>
+          <line x1="80" y1="204" x2="138" y2="205" stroke="var(--muted)"/>
+          <text x="40" y="170" font-size="11">vads caurulē</text>
+          <line x1="103" y1="167" x2="142" y2="176" stroke="var(--muted)"/>
+          <!-- heights -->
+          <text x="20" y="286" font-size="11" class="num" style="fill:var(--muted)">0 m</text>
+          <line x1="300" y1="152" x2="318" y2="152" stroke="var(--muted)"/>
+          <text x="322" y="156" font-size="11" class="num" style="fill:var(--muted)">~2,3 m pārkares stūris</text>
+          <line x1="215" y1="92" x2="240" y2="80" stroke="var(--muted)"/>
+          <text x="244" y="80" font-size="11" class="num" style="fill:var(--muted)">~3,3 m kore</text>
+          <text x="210" y="312" text-anchor="middle" font-size="11" class="num" style="fill:var(--muted)">~2,5 m (zelminis ar durvīm vērsts pret aploku)</text>
+        </svg>
+      </div>
+      <div class="side">
+        <ul>
+          <li><b>Blakus esošajai āra lampai</b> (virs durvīm, zem pārkares) jau ir elektrība un pietiekams augstums. Elektriķis var pieslēgt kameru un IR prožektoru pie lampas vada, tad rozete nav vajadzīga. Lampu naktī izslēdz vai liec uz kustības sensoru, lai tā neapžilbina kameru.</li>
+          <li><b>Kamera zem zelmiņa pārkares, tuvu korei</b>, nedaudz uz aploka pusi. Tā ir vienīgā vieta, kas ir augstāk par ~2,7 m, ko zirgs aizsniedz, paceļot galvu. Pārkare pasargā no sniega un lietus.</li>
+          <li><b>Neliec uz sānu sienām vai pārkares stūriem.</b> Tie ir ~2,3 m augstumā, tātad zirgam mutes augstumā.</li>
+          <li>Lai kamera redzētu arī gar aploka puses sienu, stiprini to uz <b>īsa sienas kronšteina</b> (20–30 cm), lai tā izvirzās ārpus zelmiņa malas.</li>
+          <li><b>IR prožektors</b> tajā pašā augstumā, 0,5–1 m sānis no kameras.</li>
+          <li>Vadu līdz rozetei ved pa sienu gofrētā caurulē. Rozete ir durvju augstumā, tāpēc zirgs to aizsniedz: vadu un kontaktdakšu nosedz vai piestiprini cieši pie sienas.</li>
+          <li>Kamera 1 neredz aiz staļļa. Staļļa otrā galā zelmiņa nav, tāpēc kamera 2 paliek uz tack room: uz stūra ar īsu mastu vai kronšteinu, lai tā būtu vismaz 2,8–3 m augstumā, jo pie dzirdnes zirgi stāv visvairāk.</li>
+        </ul>
+        <p class="note">Augstumi aplēsti pēc bildes. Pirms urbšanas nomēri, cik augstu ir kore un pārkares stūris.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const ITEMS=[
+ {g:"Amazon.de – obligāti"},
+ {id:"trackmix",n:"Reolink TrackMix WiFi",d:"4K, 2 objektīvi, seko kustībai, IR 30 m",w:"Kamera 1 – staļļa priekšpuse pie lampas",q:1,p:172.72,u:"https://www.amazon.de/dp/B0B4KB6CTB",m:1},
+ {id:"elite",n:"Reolink Elite WiFi 180°",d:"4K panorāma, nekustīga",w:"Kamera 2 – tack room stūris uz masta ≥2,8 m",q:1,p:130.14,u:"https://www.amazon.de/dp/B0DRHSK4RR",m:1},
+ {id:"ir1",n:"Univivi IR prožektors 20 LED, 850 nm",d:"Ieslēdzas krēslā pats, IP67",w:"IR 1 – staļļa zelminis, 0,5–1 m no kameras 1",q:1,p:53.88,u:"https://www.amazon.de/dp/B0CTQ8C73Q",m:1},
+ {id:"sd256",n:"SanDisk High Endurance 256 GB",d:"Nepārtrauktam ierakstam",w:"Kamerā 1",q:1,p:79.21,u:"https://www.amazon.de/dp/B07P4HBRMV",m:1},
+ {id:"sd128",n:"SanDisk High Endurance 128 GB",d:"Nepārtrauktam ierakstam",w:"Kamerā 2",q:1,p:36.59,u:"https://www.amazon.de/dp/B07NY23WBG",m:1},
+ {id:"flood",n:"Oktaplex Cali LED 30 W ar kustības sensoru",d:"Silta gaisma, 2200 lm",w:"Tack room stūris pie dzirdnes, ≥3 m, uz smiltīm",q:1,p:49.99,u:"https://www.amazon.de/dp/B08PKTVNGN",m:1},
+ {id:"shelly",n:"Shelly 1 Mini Gen3",d:"Gaismu slēdz no telefona un pēc grafika",w:"Aiz jaunās gaismas un esošās staļļa lampas",q:2,p:11.18,u:"https://www.amazon.de/dp/B0CQCHS2QS",m:1},
+ {g:"Būvveikalā"},
+ {id:"pipe",n:"Gofrētā aizsargcaurule vadiem",d:"~5–10 m",w:"Vadi uz staļļa un tack room",q:1,t:"~5–10 €",m:0},
+ {id:"mast",n:"Kronšteins vai īss masts kamerai",d:"Lai kamera 2 ir ≥2,8–3 m",w:"Tack room stūris",q:1,t:"~15–30 €",m:0},
+ {id:"box",n:"Āra sadales kārba IP65",d:"Elektriķim pie lampām",w:"Pie lampām",q:2,t:"~5–10 €",m:0},
+ {g:"Tikai ja vajadzēs"},
+ {id:"ir2",n:"Univivi IR prožektors 12 LED, 30 m",d:"Ja vārtu nakts attēls par tumšu",w:"IR 2 – pie kameras 2, uz vārtiem",q:1,p:44.73,u:"https://www.amazon.de/dp/B09L7YC8HF",m:0},
+ {id:"dc5",n:"12 V DC pagarinātājs 5 m (5,5×2,1 mm)",d:"Ja kamerai 2 strāvu velk no tālākas rozetes",w:"Kamera 2",q:1,t:"~8–10 €",m:0}
+];
+const eur=v=>v.toLocaleString("lv-LV",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+let done={};try{done=JSON.parse(localStorage.getItem("shopDone")||"{}")}catch(e){}
+function render(){
+  const tb=document.getElementById("rows");tb.innerHTML="";
+  let must=0,left=0;
+  for(const it of ITEMS){
+    const tr=document.createElement("tr");
+    if(it.g){tr.className="grp";tr.innerHTML='<td></td><td colspan="4">'+it.g+'</td>';tb.appendChild(tr);continue}
+    const sum=it.p?it.p*it.q:null;
+    if(it.m&&sum){must+=sum;if(!done[it.id])left+=sum}
+    if(done[it.id])tr.className="done";
+    const name=it.u?'<a href="'+it.u+'" target="_blank" rel="noopener">'+it.n+'</a>':it.n;
+    tr.innerHTML='<td><input type="checkbox" id="c-'+it.id+'" aria-label="Nopirkts: '+it.n+'"'+(done[it.id]?" checked":"")+'></td><td>'+name+'<small>'+it.d+'</small></td><td>'+it.w+'</td><td class="r num">'+it.q+'</td><td class="r num">'+(sum?eur(sum)+(it.q>1?'<small>'+eur(it.p)+' gab.</small>':''):it.t)+'</td>';
+    tr.querySelector("input").addEventListener("change",e=>{done[it.id]=e.target.checked;try{localStorage.setItem("shopDone",JSON.stringify(done))}catch(_){ }render()});
+    tb.appendChild(tr);
+  }
+  document.getElementById("tMust").textContent=eur(must);
+  document.getElementById("tLeft").textContent=eur(left);
+}
+render();
+</script>
+
+</body>
+</html>
