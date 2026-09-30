@@ -235,7 +235,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
         <ul style="margin-top:10px">
           <li>Tālākais aploka stūris ir ~42 m no staļļa: naktī tur vajag IR prožektoru (abām kamerām IR 30 m).</li>
           <li>Abām RTSP/RTMP/ONVIF: video vēlāk var rādīt arī tīmeklī.</li>
-          <li>Ieraksts uz microSD katrā kamerā (līdz 512 GB); Home Hub nav obligāts.</li>
+          <li>Ieraksts uz microSD katrā kamerā (līdz 512 GB); Home Hub nav obligāts, pagaidām nepirkts.</li>
         </ul>
       </section>
       <section class="q">
@@ -258,7 +258,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:var(--grass-edge)}
       <li><b>Viens kabelis = strāva + video.</b> Kamerām nevajag rozeti uz staļļa, nav WiFi pārrāvumu un nav barošanas bloku ārā. Abas kameras 24/7 raksta 4K stabili.</li>
       <li><b>Caurule zemē no tack room līdz stallim, tajā 2 CAT6 kabeļi.</b> Mazens: "ieraktu trubiņu no baseina malas līdz stallim". Uz staļļa kabeļi iet augšā gofrētā caurulē pa sienu līdz kamerām.</li>
       <li><b>Zirgi un kabelis:</b> saules paneļu kabelis gofrā jau ir ierakts, un zirgi to neaiztiek. Tas pats princips.</li>
-      <li><b>Tack room:</b> PoE+ switch (4 PoE porti, 65 W, pietiek abām kamerām ar rezervi). Switch vajag interneta pieslēgumu: LAN kabelis no rūtera vai WiFi tilts ar LAN portu, ja kabeļa nav.</li>
+      <li><b>Tack room:</b> PoE+ switch (4 PoE porti, 65 W, pietiek abām kamerām ar rezervi). Internets: mazajai mājai būs atsevišķs 4G rūteris ar SIM karti, switch pieslēdz tā LAN portā (Janas lēmums 30.09.).</li>
       <li><b>Home Hub</b> (pēc izvēles): viena vieta ierakstam abām kamerām, koplietošana ģimenei bez kameras paroļu došanas. Bez tā iet uz microSD un Reolink lietotni.</li>
       <li>Reolink darba temperatūra -10...+55 °C abām; uz staļļa zem jumta pārkares. Kamera 1 (nekustīga) salā ir drošāka, kamera 2 grozās - ziemā to sargpozīcijā daudz negrozīt.</li>
     </ul>
@@ -383,7 +383,7 @@ const ITEMS=[
  {id:"hub",n:"Reolink Home Hub",d:"Centrāls ieraksts + koplietošana; Reolink LV lētāk (120,34 €)",w:"Tack room pie switch",q:1,p:132.18,u:"https://www.amazon.de/dp/B0CZRGVJZF",m:0},
  {id:"flood",n:"Oktaplex Cali LED 30 W ar kustības sensoru",d:"Silta gaisma barošanai, 2200 lm (no iepriekšējā plāna)",w:"Tack room stūris pie dzirdnes, ≥3 m",q:1,p:49.99,u:"https://www.amazon.de/dp/B08PKTVNGN",m:0},
  {id:"shelly",n:"Shelly 1 Mini Gen3",d:"Gaismu slēdz no telefona un pēc grafika",w:"Aiz jaunās gaismas un staļļa lampas",q:2,p:11.18,u:"https://www.amazon.de/dp/B0CQCHS2QS",m:0},
- {id:"uplink",n:"WiFi tilts ar LAN portu (ja tack room nav LAN kabeļa)",d:"Savieno switch ar mājas WiFi",w:"Tack room",q:1,t:"~25–40 €",m:0}
+ {id:"lte",n:"4G rūteris ar SIM karti (atsevišķi, mazajai mājai)",d:"Switch pieslēdz rūtera LAN portā; SIM ar pietiekamu datu limitu 24/7 skatīšanai",w:"Tack room",q:1,t:"pērk atsevišķi",m:0}
 ];
 const eur=v=>v.toLocaleString("lv-LV",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
 let done={};try{done=JSON.parse(localStorage.getItem("shopDonePoe")||"{}")}catch(e){}
